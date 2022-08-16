@@ -4,10 +4,10 @@ import sys
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import (QApplication,QWidget,QGridLayout, QPushButton)
 
-class set_map(QWidget):
+class Set_map(QWidget):
     """地图属性初始化"""
     def __init__(self):
-        super(set_map, self).__init__()
+        super(Set_map, self).__init__()
         # 地图初始大小
         self.size_x = 5
         self.size_y = 5
@@ -36,7 +36,7 @@ class set_map(QWidget):
     """地图生成器"""
     def set(self, positions,name):
         for position, name in zip(positions, name):
-            button = QPushButton(name)
+            button = Chess(note=name)
             #设置按钮与网格大小相同
             button.setMinimumSize(QtCore.QSize(self.grid.width,self.grid.highth))
             #button.setStyleSheet("background-color : red")
@@ -44,9 +44,17 @@ class set_map(QWidget):
             #将地图储存，便于后续操作调整
             self.cache.append(button)
 
+class Chess(QPushButton):
+    def __init__(self,note=None):
+        super(Chess, self).__init__()
+        self.note = note
+    # def clicked(self, checked: bool = ...) -> None:
+    #     super(Chess, self).clicked()
+    #     return self.note
+
 #测试ui界面
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    w = set_map()
+    w = Set_map()
     w.show()
     app.exec()
