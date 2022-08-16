@@ -43,10 +43,19 @@ class Set_map(QWidget):
             #设置字体隐藏，把字体用于sender()确定来源
             button.setStyleSheet("color : rgb(0,0,0,0);\n"
                                  "background-color : rgb(255,255,255,255)")
+            # #设置按钮定位
+            # button.note = name
             #添加按钮到布局
             self.grid.addWidget(button, *position)
             #将地图储存，便于后续操作调整
             self.cache.append(button)
+
+# class Chess(QPushButton):
+#     def __init__(self,note=None):
+#         super(Chess, self).__init__()
+#         # 用于定位按钮对象
+#         self.note = note
+
 
 #测试ui界面
 if __name__ == '__main__':

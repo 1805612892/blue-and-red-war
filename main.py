@@ -10,10 +10,11 @@ class game():
     def __init__(self):
         self.land = map_init()
         self.listen()
+    """建立鼠标监听事件"""
     def listen(self):
         for button in self.land.cache:
             button.clicked.connect(self.record)
-    """感知鼠标点击"""
+    """判断点击来源"""
     def record(self):
         send = self.land.sender()
         print(send.text())
@@ -23,7 +24,8 @@ class game():
     """棋子移动"""
     def move(self):
         self.check()
-        if self.site != None:
+        #还没写
+        if False:
             self.land.cache[self.site].setStyleSheet("background-color : red")
 
 class player():
