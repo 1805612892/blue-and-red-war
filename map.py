@@ -36,21 +36,17 @@ class Set_map(QWidget):
     """地图生成器"""
     def set(self, positions,name):
         for position, name in zip(positions, name):
-            button = Chess(note=name)
+            # button = Chess(note = name)
+            button = QPushButton(name)
             #设置按钮与网格大小相同
             button.setMinimumSize(QtCore.QSize(self.grid.width,self.grid.highth))
-            #button.setStyleSheet("background-color : red")
+            #设置字体隐藏，把字体用于sender()确定来源
+            button.setStyleSheet("color : rgb(0,0,0,0);\n"
+                                 "background-color : rgb(255,255,255,255)")
+            #添加按钮到布局
             self.grid.addWidget(button, *position)
             #将地图储存，便于后续操作调整
             self.cache.append(button)
-
-class Chess(QPushButton):
-    def __init__(self,note=None):
-        super(Chess, self).__init__()
-        self.note = note
-    # def clicked(self, checked: bool = ...) -> None:
-    #     super(Chess, self).clicked()
-    #     return self.note
 
 #测试ui界面
 if __name__ == '__main__':
