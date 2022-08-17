@@ -48,22 +48,25 @@ from map import Set_map
     # w = main_window()
     # w.ui.show()
     # app.exec()
-"""玩家信息"""
-class player():
-    def __init__(self,player_number):
-        # 储存身分组信息
-        self.id = None
-        self.flag = ['red','blue','yellow']
-        self.player_chess(player_number)
-    """玩家的棋子信息"""
-    def player_chess(self,player_number):
-        id = []
-        for i in range(player_number):
-            id.append(i)
-        self.id = zip(id,self.flag)
-        for x in self.id:
-            print(x)
-
-game = player(2)
+# """玩家信息"""
+# class player():
+#     def __init__(self,player_number):
+#         # 储存身分组信息
+#         self.id = None
+#         self.flag = ['red','blue','yellow']
+#         self.player_chess(player_number)
+#     """玩家的棋子信息"""
+#     def player_chess(self,player_number):
+#         id = []
+#         for i in range(player_number):
+#             id.append(i)
+#         self.id = zip(id,self.flag)
+#         for x in self.id:
+#             print(x)
+#
+# game = player(2)
+a = [[],[]]
+a[0].append(1)
+print(a)
 
 

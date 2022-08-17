@@ -63,11 +63,12 @@ class game():
     def march(self,site):
         #保证交替下棋
         color = self.player.flag[self.player.id[self.player.round_now]]
-        self.player.player_round()
-        # 安全检查通过，允许进军
         if site != None:
         #持续隐藏字体
             self.flag(self.land.cache[site],color)
+        #储存玩家下的棋子的位置
+            self.player.chess_map[self.player.round_now].append(self.land.cache[site].text())
+        self.player.player_round()
 
     """棋子染色"""
     def flag(self,object,color):
@@ -77,12 +78,13 @@ class game():
 """玩家信息"""
 class player():
     #储存累计回合数
-    round = 1
+    round = 0
     round_now = None
     def __init__(self,player_number):
         # 储存身分组信息
         self.id = None
-        self.flag = ['red','blue','yellow']
+        self.flag = ['red','blue','yellow','black']
+        self.chess_map = []
         self.player_chess(player_number)
         self.player_number = player_number
         self.player_round()
@@ -91,8 +93,10 @@ class player():
         id = []
         for i in range(player_number):
             id.append(i)
-        # self.id = zip(id,self.flag)
+            #创建储存玩家拥有棋子的位置
+            self.chess_map = [[] for x in range(player_number)]
         self.id = id
+        # print(self.chess_map)
     """判断当前回合"""
     def player_round(self):
         # 当前回合记录
