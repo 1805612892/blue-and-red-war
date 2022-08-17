@@ -51,8 +51,8 @@ class game():
         if site != None:
             #检查为人类棋子
             if sign == 0:
-                #回合判定
-                if premit != None:
+                #premit控制，还没写
+                if True:
                     self.march(site)
             #检查为高山地形
             if sign == 1:
