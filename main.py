@@ -52,10 +52,9 @@ class Game():
         for i in range(len(self.land.cache)):
             if self.land.cache[i].text() == self.chess:
                 site = i
-                # 遍历禁止地形
-                for disable in self.disable:
-                    if self.land.cache[i] == disable:
-                        site = None
+                # 判断禁止地形
+                if self.land.cache[i] in self.disable:
+                    site = None
         # 安全检查通过，允许进军
         if site != None:
             # 检查为人类棋子
@@ -63,6 +62,7 @@ class Game():
                 # permit控制，还没写
                 if True:
                     self.march(site)
+                    self.disable.append(self.land.cache[site])
             # 检查为高山地形
             if sign == 1:
                 self.flag(self.land.cache[site], 'green')
