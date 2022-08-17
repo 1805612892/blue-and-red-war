@@ -3,9 +3,9 @@ import sys
 import random
 
 # from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication,QDialog
+from PyQt5.QtWidgets import QApplication, QDialog
 
-from map import Set_map
+from map import SetMap
 
 # class main_window(QDialog):
 #     def __init__(self):
@@ -44,10 +44,10 @@ from map import Set_map
 # print(w)
 # w.show()
 # app.exec()
-    # app = QApplication(sys.argv)
-    # w = main_window()
-    # w.ui.show()
-    # app.exec()
+# app = QApplication(sys.argv)
+# w = main_window()
+# w.ui.show()
+# app.exec()
 # """玩家信息"""
 # class player():
 #     def __init__(self,player_number):
@@ -65,8 +65,6 @@ from map import Set_map
 #             print(x)
 #
 # game = player(2)
-a = [[],[]]
+a = [[], []]
 a[0].append(1)
 print(a)
-
-
