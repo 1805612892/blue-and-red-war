@@ -1,5 +1,6 @@
 #!/usr/bin/python#-*-coding:utf-8-*-
 import sys
+import random
 
 # from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication,QDialog
@@ -16,20 +17,30 @@ from map import Set_map
 #         b00.clicked.connect(self.go)
 #     def go(self):
 #         print(666)
-print(2222222222)
-class onetest(set_map):
-    def __init__(self):
-        print(555)
-        super(onetest,self).__init__()
-        self.cache[0].setStyleSheet("background-color : red")
-        print(111)
+# print(2222222222)
+# class onetest(set_map):
+#     def __init__(self):
+#         print(555)
+#         super(onetest,self).__init__()
+#         self.cache[0].setStyleSheet("background-color : red")
+#         print(111)
 
 print(222222)
-
+class map_init(Set_map):
+    def __init__(self):
+        super(map_init, self).__init__()
+        self.define_terrain()
+    """扩展地图"""
+    def extend_map(self):
+        pass
+    """地形设置"""
+    def define_terrain(self):
+        self.chess_name = str((random.randint(0,self.size_x - 1),random.randint(0,self.size_y - 1)))
+        print(self.chess_name)
 """pyqt的奇怪bug，只可以在类内或者QApp内调用它子类的属性/方法"""
 print(9999)
 app = QApplication(sys.argv)
-w = onetest()
+w = map_init()
 print(w)
 w.show()
 app.exec()
