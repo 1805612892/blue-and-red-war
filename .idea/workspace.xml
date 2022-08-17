@@ -48,7 +48,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.set_map">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="blue-and-red-war" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -138,7 +138,7 @@
       <workItem from="1660618306209" duration="23632000" />
       <workItem from="1660699572067" duration="6102000" />
       <workItem from="1660709004115" duration="6000" />
-      <workItem from="1660723070698" duration="8522000" />
+      <workItem from="1660723070698" duration="9190000" />
     </task>
     <servers />
   </component>
