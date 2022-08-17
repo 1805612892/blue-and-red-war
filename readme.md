@@ -1,8 +1,13 @@
 # 红蓝棋战争守则
 
 > 红蓝棋主体规则由[祁达方](https://www.zhihu.com/people/qi-da-fang)制定，地形部分和多人混战部分由本项目作者悠悠补充。
+> The rule's athuor is qidafang,but its extand rule is write by me.
 
+> 感谢github的cliffigor前辈对本项目提供的分支修改！改的超规范！
+> 
+> Thanks for cliffigor's help.
 ##  军队调遣规则
+>The rule used English will update someday.
 
 红先蓝后，交替走棋，将其走到与之邻接的空白格子（所谓邻接就是上下左右最近一格，所谓空白就是没有双方棋子和不可通过的地形）。
 
