@@ -25,29 +25,45 @@ from map import Set_map
 #         self.cache[0].setStyleSheet("background-color : red")
 #         print(111)
 
-print(222222)
-class map_init(Set_map):
-    def __init__(self):
-        super(map_init, self).__init__()
-        self.define_terrain()
-    """扩展地图"""
-    def extend_map(self):
-        pass
-    """地形设置"""
-    def define_terrain(self):
-        self.chess_name = str((random.randint(0,self.size_x - 1),random.randint(0,self.size_y - 1)))
-        print(self.chess_name)
-"""pyqt的奇怪bug，只可以在类内或者QApp内调用它子类的属性/方法"""
-print(9999)
-app = QApplication(sys.argv)
-w = map_init()
-print(w)
-w.show()
-app.exec()
+# print(222222)
+# class map_init(Set_map):
+#     def __init__(self):
+#         super(map_init, self).__init__()
+#         self.define_terrain()
+#     """扩展地图"""
+#     def extend_map(self):
+#         pass
+#     """地形设置"""
+#     def define_terrain(self):
+#         self.chess_name = str((random.randint(0,self.size_x - 1),random.randint(0,self.size_y - 1)))
+#         print(self.chess_name)
+# """pyqt的奇怪bug，只可以在类内或者QApp内调用它子类的属性/方法"""
+# print(9999)
+# app = QApplication(sys.argv)
+# w = map_init()
+# print(w)
+# w.show()
+# app.exec()
     # app = QApplication(sys.argv)
     # w = main_window()
     # w.ui.show()
     # app.exec()
+"""玩家信息"""
+class player():
+    def __init__(self,player_number):
+        # 储存身分组信息
+        self.id = None
+        self.flag = ['red','blue','yellow']
+        self.player_chess(player_number)
+    """玩家的棋子信息"""
+    def player_chess(self,player_number):
+        id = []
+        for i in range(player_number):
+            id.append(i)
+        self.id = zip(id,self.flag)
+        for x in self.id:
+            print(x)
 
+game = player(2)
 
 
