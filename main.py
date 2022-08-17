@@ -7,15 +7,13 @@ from PyQt5.QtWidgets import QApplication
 from map import Set_map
 
 """游戏主体"""
-class game():
-
+class Game():
     """初始化"""
     def __init__(self):
         self.land = map_init()
         self.init_extend_map()
-        self.player = player(2)
+        self.player = Player(2)
         self.listen()
-
 
     """扩展地图初始化"""
     def init_extend_map(self):
@@ -37,9 +35,9 @@ class game():
         self.check()
 
     """检查移动条件"""
-    def check(self,sign = 0):
+    def check(self, sign = 0):
         site = None
-        premit = None
+        permit = None
         for i in range(len(self.land.cache)):
             if self.land.cache[i].text() == self.chess:
                 site = i
@@ -47,49 +45,49 @@ class game():
                 for disable in self.disable:
                     if self.land.cache[i] == disable:
                         site = None
-        #安全检查通过，允许进军
+        # 安全检查通过，允许进军
         if site != None:
-            #检查为人类棋子
+            # 检查为人类棋子
             if sign == 0:
-                #premit控制，还没写
+                # permit控制，还没写
                 if True:
                     self.march(site)
-            #检查为高山地形
+            # 检查为高山地形
             if sign == 1:
-                self.flag(self.land.cache[site],'green')
+                self.flag(self.land.cache[site], 'green')
                 self.disable.append(self.land.cache[site])
 
     """棋子移动"""
-    def march(self,site):
-        #保证交替下棋
+    def march(self, site):
+        # 保证交替下棋
         color = self.player.flag[self.player.id[self.player.round_now]]
         if site != None:
-        #持续隐藏字体
-            self.flag(self.land.cache[site],color)
-        #储存玩家下的棋子的位置
+        # 持续隐藏字体
+            self.flag(self.land.cache[site], color)
+        # 储存玩家下的棋子的位置
             self.player.chess_map[self.player.round_now].append(self.land.cache[site].text())
         self.player.player_round()
 
     """棋子染色"""
-    def flag(self,object,color):
-        object.setStyleSheet("color : rgb(0,0,0,0);\n"
+    def flag(self, object, color):
+        object.setStyleSheet("color : rgb(0, 0, 0, 0);\n"
                                  "background-color : {}".format(color))
 
 """玩家信息"""
-class player():
+class Player():
     #储存累计回合数
     round = 0
     round_now = None
-    def __init__(self,player_number):
+    def __init__(self, player_number):
         # 储存身分组信息
         self.id = None
-        self.flag = ['red','blue','yellow','black']
+        self.flag = ['red', 'blue', 'yellow', 'black']
         self.chess_map = []
         self.player_chess(player_number)
         self.player_number = player_number
         self.player_round()
     """玩家的棋子信息"""
-    def player_chess(self,player_number):
+    def player_chess(self, player_number):
         id = []
         for i in range(player_number):
             id.append(i)
@@ -112,12 +110,12 @@ class map_init(Set_map):
         pass
     """随机位置生成一座高山"""
     def define_terrain(self):
-        self.chess_name = str((random.randint(0,self.size_x - 1),random.randint(0,self.size_y - 1)))
+        self.chess_name = str((random.randint(0, self.size_x - 1), random.randint(0, self.size_y - 1)))
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    w = game()
+    w = Game()
     w.land.show()
     app.exec()
 

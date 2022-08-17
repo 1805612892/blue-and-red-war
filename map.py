@@ -2,7 +2,7 @@
 import sys
 
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import (QApplication,QWidget,QGridLayout, QPushButton)
+from PyQt5.QtWidgets import (QApplication, QWidget, QGridLayout, QPushButton)
 
 class Set_map(QWidget):
     """地图属性初始化"""
@@ -31,18 +31,18 @@ class Set_map(QWidget):
     def init_set(self):
         positions = [(i, j) for i in range(self.size_x) for j in range(self.size_y)]
         name = [(i, j) for i in range(self.size_x) for j in range(self.size_y)]
-        name = map(str,name)
-        self.set(positions,name)
+        name = map(str, name)
+        self.set(positions, name)
     """地图生成器"""
-    def set(self, positions,name):
+    def set(self, positions, name):
         for position, name in zip(positions, name):
             # button = Chess(note = name)
             button = QPushButton(name)
             #设置按钮与网格大小相同
-            button.setMinimumSize(QtCore.QSize(self.grid.width,self.grid.highth))
+            button.setMinimumSize(QtCore.QSize(self.grid.width, self.grid.highth))
             #设置字体隐藏，把字体用于sender()确定来源
-            button.setStyleSheet("color : rgb(0,0,0,0);\n"
-                                 "background-color : rgb(255,255,255,255)")
+            button.setStyleSheet("color : rgb(0, 0, 0, 0);\n"
+                                 "background-color : rgb(255, 255, 255, 255)")
             # #设置按钮定位
             # button.note = name
             #添加按钮到布局
@@ -51,7 +51,7 @@ class Set_map(QWidget):
             self.cache.append(button)
 
 # class Chess(QPushButton):
-#     def __init__(self,note=None):
+#     def __init__(self, note=None):
 #         super(Chess, self).__init__()
 #         # 用于定位按钮对象
 #         self.note = note
