@@ -56,7 +56,7 @@ class Game():
                 if self.land.cache[i] in self.disable:
                     site = None
         # 安全检查通过，允许进军
-        if site != None:
+        if site is not None:
             # 检查为人类棋子
             if sign == 0:
                 # permit控制，还没写
@@ -75,7 +75,7 @@ class Game():
         """
         # 保证交替下棋
         color = self.player.flag[self.player.id[self.player.round_now]]
-        if site != None:
+        if site is not None:
             # 持续隐藏字体
             self.flag(self.land.cache[site], color)
         # 储存玩家下的棋子的位置
