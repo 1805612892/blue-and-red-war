@@ -1,6 +1,7 @@
 #!/usr/bin/python#-*-coding:utf-8-*-
 import sys
 import random
+from collections.abc import Iterable
 
 from PyQt5.QtWidgets import QApplication
 
@@ -24,9 +25,22 @@ class Game():
         self.land.define_terrain()
         # 禁止通过地形
         self.disable = []
-        self.chess = self.land.chess_name
-        self.check(sign=1)
-
+        self.map_load(self.land.chess_name, 1)
+        # 导入军队初始布局
+        self.map_load(self.land.chess_layout_1, 2)
+        self.map_load(self.land.chess_layout_2, 3)
+    def map_load(self, context, sign):
+        """
+        :param context: 导入地图的棋子名称
+        :param sign 导入功能的check的sign值
+        """
+        if isinstance(context, str):
+            self.chess = context
+            self.check(sign)
+        else:
+            for name in context:
+                self.chess = name
+                self.check(sign)
     def listen(self):
         """
         建立鼠标监听事件
@@ -63,11 +77,17 @@ class Game():
                 if True:
                     self.march(site)
                     self.disable.append(self.land.cache[site])
-            # 检查为高山地形
+            # 检查为高山地形/导入初始军队地形
             if sign == 1:
                 self.flag(self.land.cache[site], 'green')
                 self.disable.append(self.land.cache[site])
-
+            #军队初始布局
+            #红方
+            if sign == 2:
+                self.flag(self.land.cache[site], 'red')
+            #蓝方
+            if sign == 3:
+                self.flag(self.land.cache[site], 'blue')
     def march(self, site):
         """
         棋子移动
@@ -92,7 +112,6 @@ class Game():
         chess.setStyleSheet("color : rgb(0,0,0,0);\n"
                             "background-color : {}".format(color))
 
-
 class Player():
     """
     玩家信息
@@ -111,7 +130,9 @@ class Player():
         self.player_round()
 
     def player_chess(self, player_number):
-        """玩家的棋子信息"""
+        """
+        玩家的棋子信息
+        """
         id = []
         for i in range(player_number):
             id.append(i)
@@ -119,7 +140,6 @@ class Player():
             self.chess_map = [[]
                               for x in range(player_number)]  # 创建储存玩家拥有棋子的位置
         self.id = id
-        # print(self.chess_map)
 
     def player_round(self):
         """判断当前回合"""
@@ -129,18 +149,35 @@ class Player():
 
 class MapInit(SetMap):
     def __init__(self):
-        """地图初始化"""
+        """
+        地图初始化
+        """
         super(MapInit, self).__init__()
 
     def extend_map(self):
-        """扩展地图"""
+        """
+        扩展地图
+        """
         pass
 
     def define_terrain(self):
-        """随机位置生成一座高山"""
+        """
+        随机位置生成一座高山
+        """
         self.chess_name = str(
             (random.randint(0, self.size_x - 1), random.randint(0, self.size_y - 1)))
-
+        self.army_init()
+    def army_init(self, mode=0):
+        """
+        军队部署初始化
+        :param mode 初始军队布局样式
+        """
+        if mode == 0:
+            self.chess_layout_1 = [(3, 0), (4, 1), (3, 1), (2, 0), (4, 2)]
+            # 对称生成棋子
+            self.chess_layout_2 = [(y, x) for (x, y) in self.chess_layout_1]
+        self.chess_layout_1 = map(str,self.chess_layout_1)
+        self.chess_layout_2 = map(str,self.chess_layout_2)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
