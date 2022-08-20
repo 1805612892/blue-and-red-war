@@ -76,18 +76,18 @@ class Game():
                 # permit控制，还没写
                 if True:
                     self.march(site)
-                    self.disable.append(self.land.cache[site])
             # 检查为高山地形/导入初始军队地形
             if sign == 1:
                 self.flag(self.land.cache[site], 'green')
-                self.disable.append(self.land.cache[site])
             #军队初始布局
-            #红方
+            # 红方
             if sign == 2:
                 self.flag(self.land.cache[site], 'red')
-            #蓝方
+            # 蓝方
             if sign == 3:
                 self.flag(self.land.cache[site], 'blue')
+            # 禁止重复进入地形
+            self.disable.append(self.land.cache[site])
     def march(self, site):
         """
         棋子移动
