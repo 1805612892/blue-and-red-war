@@ -68,6 +68,17 @@ from map import SetMap
 # a = [[], []]
 # a[0].append(1)
 # print(a)
-chess_layout_1 = [(3, 0), (4, 1), (3, 3), (2, 0), (4, 2)]
-chess_layout_2 = [(y, x) for (x, y) in chess_layout_1]
-print(chess_layout_2)
+# chess_layout_1 = [(3, 0), (4, 1), (3, 3), (2, 0), (4, 2)]
+# chess_layout_2 = [(y, x) for (x, y) in chess_layout_1]
+# print(chess_layout_2)
+class a():
+    def __init__(self):
+        print(888)
+        self.o = b()
+        self.x()
+    def x(self):
+        self.o.c()
+class b():
+    def c(self):
+        print(555)
+v = a()

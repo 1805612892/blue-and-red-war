@@ -1,7 +1,6 @@
 #!/usr/bin/python#-*-coding:utf-8-*-
 import sys
 import random
-from collections.abc import Iterable
 
 from PyQt5.QtWidgets import QApplication
 
@@ -18,6 +17,7 @@ class Game():
         self.player = Player(2)
         self.listen()
 
+
     def init_extend_map(self):
         """
         扩展地图初始化
@@ -29,6 +29,7 @@ class Game():
         # 导入军队初始布局
         self.map_load(self.land.chess_layout_1, 2)
         self.map_load(self.land.chess_layout_2, 3)
+
     def map_load(self, context, sign):
         """
         :param context: 导入地图的棋子名称
@@ -62,7 +63,7 @@ class Game():
         :param sign: 0->人类棋子; 1->高山
         """
         site = None
-        permit = None
+        state = None
         for i in range(len(self.land.cache)):
             if self.land.cache[i].text() == self.chess:
                 site = i
@@ -73,13 +74,14 @@ class Game():
         if site is not None:
             # 检查为人类棋子
             if sign == 0:
-                # permit控制，还没写
-                if True:
-                    self.march(site)
+                for old_site in self.player.chess_map[self.player.round_now]:
+                    if site == old_site:
+                        state = 0
+                self.march(site, state)
             # 检查为高山地形/导入初始军队地形
             if sign == 1:
                 self.flag(self.land.cache[site], 'green')
-            #军队初始布局
+            # 军队初始布局
             # 红方
             if sign == 2:
                 self.flag(self.land.cache[site], 'red')
@@ -87,20 +89,20 @@ class Game():
             if sign == 3:
                 self.flag(self.land.cache[site], 'blue')
             # 禁止重复进入地形
-            self.disable.append(self.land.cache[site])
-    def march(self, site):
+            # self.disable.append(self.land.cache[site])
+    def march(self, site, state):
         """
         棋子移动
-        :param site: 
+        :param site: 点击位置
+        :param state: 判断染色颜色，被点击的棋子变成白色，移动到新地方,0为消除点击棋子
         """
         # 保证交替下棋
         color = self.player.flag[self.player.id[self.player.round_now]]
-        if site is not None:
-            # 持续隐藏字体
-            self.flag(self.land.cache[site], color)
-        # 储存玩家下的棋子的位置
-            self.player.chess_map[self.player.round_now].append(
-                self.land.cache[site].text())
+        # 消除棋子并在下一步生成棋子，达到移动效果
+        self.player.chess_map[self.player.round_now].append(site)
+        if state == 0:
+            color = 'white'
+        self.flag(self.land.cache[site], color)
         self.player.player_round()
 
     def flag(self, chess, color):
@@ -136,16 +138,16 @@ class Player():
         id = []
         for i in range(player_number):
             id.append(i)
-
+            # 创建储存玩家拥有棋子的位置
             self.chess_map = [[]
-                              for x in range(player_number)]  # 创建储存玩家拥有棋子的位置
+                              for x in range(player_number)]
         self.id = id
 
     def player_round(self):
         """判断当前回合"""
         # 当前回合记录,0为红选红，1为红选白，2为蓝选蓝，3为蓝选白
         self.round_now = self.round % (self.player_number * 2)
-        #保证后续接口参数一致性，把四种类型变成玩家两种类型
+        # 保证后续接口参数一致性，把四种类型变成玩家两种类型
         if self.round_now < 2:
             self.round_now = 0
         else:
@@ -182,8 +184,8 @@ class MapInit(SetMap):
             self.chess_layout_1 = [(3, 0), (4, 1), (3, 1), (2, 0), (4, 2)]
             # 对称生成棋子
             self.chess_layout_2 = [(y, x) for (x, y) in self.chess_layout_1]
-        self.chess_layout_1 = map(str,self.chess_layout_1)
-        self.chess_layout_2 = map(str,self.chess_layout_2)
+        self.chess_layout_1 = map(str, self.chess_layout_1)
+        self.chess_layout_2 = map(str, self.chess_layout_2)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
