@@ -13,8 +13,8 @@ class Game():
     def __init__(self):
         """初始化"""
         self.land = MapInit()
-        self.init_extend_map()
         self.player = Player(2)
+        self.init_extend_map()
         self.listen()
 
 
@@ -85,9 +85,11 @@ class Game():
             # 红方
             if sign == 2:
                 self.flag(self.land.cache[site], 'red')
+                self.player.chess_map[0].append(site)
             # 蓝方
             if sign == 3:
                 self.flag(self.land.cache[site], 'blue')
+                self.player.chess_map[1].append(site)
             # 禁止重复进入地形
             # self.disable.append(self.land.cache[site])
     def march(self, site, state):
