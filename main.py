@@ -143,7 +143,13 @@ class Player():
 
     def player_round(self):
         """判断当前回合"""
-        self.round_now = self.round % self.player_number  # 当前回合记录
+        # 当前回合记录,0为红选红，1为红选白，2为蓝选蓝，3为蓝选白
+        self.round_now = self.round % (self.player_number * 2)
+        #保证后续接口参数一致性，把四种类型变成玩家两种类型
+        if self.round_now < 2:
+            self.round_now = 0
+        else:
+            self.round_now = 1
         self.round += 1
 
 
